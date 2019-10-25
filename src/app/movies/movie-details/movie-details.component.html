@@ -1,0 +1,110 @@
+<header class="container-fluid">
+		<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Mini-<span class="bran">Netflix</span></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Favorites</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Popular</a></li>
+            <li><a href="#">Top Rated</a></li>
+            <li><a href="#">Latest</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Settings</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+</header>
+<div class="container-fluid">
+	<div class="row">
+        <div class="col-sm-12 ">
+            <img class="img-fluid top-image" [src]="'https://image.tmdb.org/t/p/w500/' + movie?.backdrop_path" alt="movie?.title">
+        </div>
+
+            <div class="bg" >
+                    <div class="row">
+                        <div class="card">
+                            <div class="pic col-md-2">
+                                <img class="img-fluid card-img" [src]="'https://image.tmdb.org/t/p/w500/' + movie?.poster_path" alt="movie?.title" width="100%">
+                            </div>
+
+                            <div class="card-body col-md-3">
+                              <h2 class="card-title">{{movie?.title}}</h2>
+                              <div>
+                                  <button type="button" class="btn">PG-13</button>
+                                  <span class="badge badge-info">Adventure</span>
+                                  <span class="badge badge-danger">Drama</span>
+                                  <span class="badge badge-light">Thriller</span>
+                                  <p><small>120mins</small></p>
+                              </div>
+                              <p class="card-text">{{movie?.overview}}</p>
+                              <p class="card-text"><small class="tt">{{movie.release_date}}</small></p>
+
+                              <div>
+                              <app-star class="stars" [rating]="movie.vote_average/2"
+                                      (ratingClicked)='onRatingClicked($event)'>
+                              </app-star>
+                              <span class="badge btn stars-no">{{movie.vote_average / 2}}</span>
+                            </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-7">
+                            <div class="cast">
+                                <p>Cast</p>
+                                <div *ngFor="let c of (cast ? cast.slice(0,9): []); let i = index">
+                                <span class="cast-span" *ngIf="c.profile_path">
+                                  <img class="cast-img" [src]="'https://image.tmdb.org/t/p/w500/' + c?.profile_path" alt="c.name" width="60px" height="60px">
+                                  <p class="cast-text">{{c.name}}</p>
+                                  <!-- <p>{{c.name}}</p> -->
+                                </span>
+                                </div>
+                            </div>
+                            <div class="trailer">
+                                <p>Trailer</p>
+                                <div class="trailer-div" *ngFor="let v of (trailer ? trailer.slice(0,4): []); let i = index">
+                                    <span class="trailer-span">
+                                      <iframe width="200px" height="120px"
+                                        [src]="sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + v.key + '?autoplay=1&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com')">
+                                    </iframe>
+
+                                      <!-- <iframe width="170px" height="100px"
+                                        [src]="'https://www.youtube.com/embed/' + v?.key" frameborder="0"
+                                        allowfullscreen>
+                                      </iframe> -->
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+	</div>
+  </div>
+
+  <footer class="container">
+      &copy; 2019 <a href="https://www.twitter.com/lollykrown" target="_blank">Ol&#250;wak&#225;y&#242;d&#233;. </a> All rights reserved.
+  </footer>

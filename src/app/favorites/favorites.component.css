@@ -1,0 +1,87 @@
+body {
+  font-family: Roboto, 'Open Sans', sans-serif;
+  background-color: #070707 !important;
+}
+.navbar-brand {
+    color:rgba(255,255,255,0.65);
+    font-size: 200%;
+    font-weight: 400;
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+}
+.bran {
+  color:#FF001F;
+  text-shadow:0 0 5px #FF001F;
+  font-weight: 600;
+}
+.btn{
+  background-color: #FF001F;
+  color: #fff;
+}
+.container-fluid {
+  position: relative;
+  margin-left: -10px;
+  margin-right: -15px;
+  margin-bottom: -15px;
+  background-color: #070707 !important;
+}
+.figure-img {
+  border: 6px solid #fff;
+  border-radius: 10px;
+}
+.card {
+  box-shadow: 6px 6px 8px #777;
+  width: 230px;
+  margin: 20px;
+  padding: 10px;
+  border-radius: 10px;
+}
+:hover {
+  text-decoration: none;
+}
+@media (min-width: 992px){
+  .col-md-4 {
+      width: 25%;
+  }
+}
+figcaption {
+  height: 35px;
+  margin-top: 10px;
+  font-weight: 600;
+  font-size: 24px;
+  margin-bottom: 10px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #FF001F;
+}
+.r-date{
+  float: left;
+  text-decoration: none;
+}
+.fa-heart-o {
+  margin-left: 150px;
+  margin-bottom: 10px;
+}
+.fa-heart {
+  margin-left: 150px;
+  margin-bottom: 10px;
+  color: #FF001F;
+}
+
+.disabled {
+  display: none;
+}
+.avi {
+  height: 40px;
+  margin-right: 10px;
+  border: 2px solid #fff;
+  border-radius: 4px;
+}
+.mce-btn-small {
+  margin-top: -15px;
+}
+.logout {
+  margin-right: 20px;
+  margin-left: 20px;
+}

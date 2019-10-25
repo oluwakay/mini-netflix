@@ -1,0 +1,62 @@
+<header class="container-fluid">
+		<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Mini-<span class="bran">Netflix</span></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#" >Home <span class="sr-only">(current)</span></a></li>
+        <li><a [routerLink]="['/movies/favorites']" routerLinkActive="active"
+          [routerLinkActiveOptions]="{exact:true}">Favorites</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Popular</a></li>
+            <li><a href="#">Top Rated</a></li>
+            <li><a href="#">Latest</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Settings</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text"  class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+</header>
+<div class="container-fluid">
+  <h2 class="vid">{{pageTitle}}</h2>
+  <div class="row vid">
+      <div *ngFor="let f of favs" class="col-md-4">
+          <div class="card">
+              <a [routerLink]="['/movies', f.id]">
+              <figure class="figure">
+                <img [src]="'https://image.tmdb.org/t/p/w500/' + f?.poster_path" class="figure-img img-fluid rounded" alt="poster" width="200" height="300">
+                <figcaption class="figure-caption" [title]="f?.title">{{f?.title}}</figcaption>
+              </figure>
+            </a>
+              <div>
+              <p class="r-date"><strong>{{f.release_date}}</strong></p>
+              <!-- <span class="fa fa-heart-o" *ngIf="!isFavorite" (click)="favButton(m.id, j)"></span>
+              <span class="fa fa-heart" (click)="favButton(f.id, j)" *ngIf="isFavorite"></span> -->
+            </div>
+          </div>
+
+      </div>
+  </div>
+</div>

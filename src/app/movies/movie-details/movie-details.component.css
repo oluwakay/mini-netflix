@@ -1,0 +1,133 @@
+body {
+  font-family: Roboto, 'Open Sans', sans-serif;
+  background-color: #070707 !important;
+}
+.container-fluid {
+  position: relative;
+  margin-left: -10px;
+  margin-right: -15px;
+  margin-bottom: -15px;
+  background-color: #070707 !important;
+}
+.navbar-brand {
+  color:rgba(255,255,255,0.65);
+  font-size: 200%;
+  font-weight: 400;
+  letter-spacing: 0.15rem;
+  text-transform: uppercase;
+}
+.bran {
+color:#FF001F;
+text-shadow:0 0 5px #FF001F;
+font-weight: 600;
+}
+.card-title{
+  color: #fff !important;
+  text-shadow: #00000c;
+
+}
+.card-text, p, h2{
+  color: #fff !important;
+}
+.card-body {
+  margin-left: 10px;
+}
+.card-img {
+  margin-top: 20px;
+  width: 210px;
+  height: 300px;
+  border: 6px solid #fff;
+  border-radius: 10px;
+}
+.pic {
+   margin-right: -10px;
+}
+.bg {
+  position: absolute;
+  left: 10px;
+  top: 220px;
+  z-index: 1;
+  margin-left: 10px;
+}
+.top-image {
+  height: 320px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+.cast {
+  margin-left: 20px;
+  margin-top: 30px;
+}
+.cast-img {
+  border: 4px solid #FF001F;
+  border-radius: 10px;
+  margin: 5px;
+}
+.cast-span {
+  float: left;
+  margin-right: 10px;
+}
+.cast-text {
+  text-overflow: ellipsis;
+  width: 60px;
+}
+.btn{
+  background-color: #FF001F;
+  color: #fff;
+  border-radius: 8px;
+}
+.trailer {
+  margin-left: 20px;
+  margin-top: 150px;
+  position: absolute;
+}
+.trailer-div {
+  float: left;
+  margin-right: 10px;
+}
+/*
+.bot {
+  height: 120px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  background-color: #050708;
+  top: 230px;
+  left: 10px;
+  color: #fff !important;
+  position: relative;
+  text-align: center;
+} */
+
+footer {
+  background-color: #070708;
+  color: #ddd;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (min-width: 1200px){
+.container {
+  width: 100%;
+  background-color: #050708;
+  }
+}
+iframe {
+  float: left;
+  border: 4px solid #fff;
+  border-radius: 10px;
+}
+.stars {
+  float: left;
+  margin-right: 15px;
+}
+.stars-no {
+  color: #FFF;
+  font-weight: 600;
+}
