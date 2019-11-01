@@ -15,10 +15,11 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#" >Home <span class="sr-only">(current)</span></a></li>
-        <li><a [routerLink]="['/movies/favorites']" routerLinkActive="active"
-          [routerLinkActiveOptions]="{exact:true}">Favorites</a></li>
-        <li class="dropdown">
+          <li class="active"><a href="#" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact : true}">Home <span class="sr-only">(current)</span></a></li>
+          <li><a [routerLink]="['/movies/favorites']" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact : true}">Favorites</a></li>
+          <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">Popular</a></li>
@@ -42,7 +43,8 @@
 <div class="container-fluid">
   <h2 class="vid">{{pageTitle}}</h2>
   <div class="row vid">
-      <div *ngFor="let f of favs" class="col-md-4">
+      <h2 class="empty-favs" *ngIf="!favs.length">You don't have favorites yet</h2>
+      <div *ngFor="let f of favs; index as k" class="col-md-4">
           <div class="card">
               <a [routerLink]="['/movies', f.id]">
               <figure class="figure">
@@ -51,7 +53,8 @@
               </figure>
             </a>
               <div>
-              <p class="r-date"><strong>{{f.release_date}}</strong></p>
+              <p class="r-date"><strong>{{f.release_date | date: 'yyyy'}}</strong></p>
+              <span class="fa fa-trash" title="Delete this favorite movie?" (click)="deleteMovie(f.id, k)"></span>
               <!-- <span class="fa fa-heart-o" *ngIf="!isFavorite" (click)="favButton(m.id, j)"></span>
               <span class="fa fa-heart" (click)="favButton(f.id, j)" *ngIf="isFavorite"></span> -->
             </div>

@@ -33,10 +33,10 @@ export class MovieDetailsComponent implements OnInit {
       this.getTrailer(id);
     }
 
-    const resolvedData: MovieResolved =
-    this.route.snapshot.data['resolvedData'];
-    this.errorMessage = resolvedData.error;
-    this.onProductRetrieved(resolvedData.movie);
+    // const resolvedData: MovieResolved =
+    // this.route.snapshot.data['resolvedData'];
+    // this.errorMessage = resolvedData.error;
+    // this.onProductRetrieved(resolvedData.movie);
 
     // const vidId = +param;
     // const data: IMovie[] = JSON.parse(localStorage.getItem('results'));
@@ -59,10 +59,19 @@ onProductRetrieved(movie: IMovie): void {
     this.pageTitle = 'Product List: ' + message;
   }
   getMovieById(id: number) {
-    localStorage.getItem('results');
-    this.movieService.getMovie(id).subscribe(
-      movie => this.movie = movie,
-      error => this.errorMessage = error as any);
+    const cached = localStorage.getItem('movies');
+    if (cached !== null) {
+      const cachedMovies = JSON.parse(cached);
+      const arr = Object.keys(cachedMovies).map((key) => {
+        return Number(key), cachedMovies[key];
+      });
+      this.movie = arr.find(v => v.id === id);
+      console.log(this.movie);
+    } else {
+      this.movieService.getMovie(id).subscribe(
+        movie => this.movie = movie,
+        error => this.errorMessage = error as any);
+      }
   }
 
   getCasts(id: number) {

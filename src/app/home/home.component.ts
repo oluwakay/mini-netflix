@@ -3,7 +3,6 @@ import { IMovie } from '../movies/IMovie';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MovieService } from '../movies/movie.service';
 import { UserService } from '../shared/user.service';
-import { Observable } from 'rxjs';
 import { AuthService } from '../shared/auth.service';
 import { User } from 'firebase';
 
@@ -16,20 +15,26 @@ export class HomeComponent implements OnInit {
   pageTitle = 'Popular Movies';
   errorMessage = '';
   movies: IMovie | undefined;
+  filteredMovies: IMovie| undefined;
   movie: IMovie | undefined;
   prefix = 'https://image.tmdb.org/t/p/w500/';
   user: User;
-  isFavorite = false;
+  isFavorite: boolean;
   id: number;
-
+  _searchString: string;
 
   constructor(private route: ActivatedRoute,
-              private userService: UserService,
               private authService: AuthService,
               private router: Router,
               private movieService: MovieService) { }
 
   ngOnInit() {
+    if (this.route.snapshot.queryParamMap.has('searchString')) {
+      this.searchString = this.route.snapshot.queryParamMap.get('searchString');
+
+    } else {
+      this.filteredMovies = this.movies;
+    }
 
     this.getUserLoggedIn();
 
@@ -37,14 +42,43 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['home']);
     }
 
-    this.movieService.getMovies().subscribe({
-      next: movies => {
-        // const { results } = movies;
-        this.movies = movies;
-        console.log(this.movies);
-      },
-      error: err => this.errorMessage = err
-    });
+    const cache = localStorage.getItem('movies');
+    // const cache = sessionStorage.getItem('movies');
+    if (cache !== null) {
+      const obj = JSON.parse(cache);
+      // const arr = [];
+      const arr = Object.keys(obj).map((key) => {
+        return Number(key), obj[key];
+      });
+      console.log(arr);
+      this.movies = arr;
+      this.filteredMovies = this.movies;
+    } else {
+      this.movieService.getMovies().subscribe({
+          next: movies => {
+            // const { results } = movies;
+            this.movies = movies;
+            console.log(this.movies);
+          },
+          error: err => this.errorMessage = err
+        });
+    }
+  }
+
+  get searchString(): string {
+    return this._searchString;
+  }
+  set searchString(value: string) {
+    this._searchString = value;
+    this.filteredMovies = this.performFilter(value);
+    // this.filteredMovies = this.searchString ? this.performFilter(this.searchString) : this.movies;
+  }
+
+  performFilter(filterBy: string): IMovie[] {
+    filterBy = filterBy.toLocaleLowerCase();
+    console.log(filterBy);
+    return this.movies.filter((m: IMovie) =>
+      m.title.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
 
   loginWithGoogle() {
@@ -58,15 +92,8 @@ export class HomeComponent implements OnInit {
   logOut() {
     this.authService.logout();
     this.router.navigate(['/home']);
+    this.user = null;
   }
-  splitYear(releaseDate: string) {
-    return releaseDate.split('-')[0];
-  }
-
-  goToSearch(search: string) {
-    this.router.navigateByUrl(`/search?${search}`)
-}
-
   cacheFAvoritesById(id: number) {
     // localStorage.getItem('results');
     let favorites = [];
@@ -99,5 +126,10 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  // onClick(mId: number) {
+  //   this.router.navigate(['/movies', mId], {
+  //     queryParams: { search: this.searchString }
+  //   });
+  // }
 
  }

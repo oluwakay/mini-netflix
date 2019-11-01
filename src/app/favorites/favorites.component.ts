@@ -18,14 +18,20 @@ export class FavoritesComponent implements OnInit {
 
   ngOnInit() {
     const cacheFavs = localStorage.getItem('favorites');
-    if (!cacheFavs) {
-      this.router.navigate(['home']);
-    }
-    if (cacheFavs) {
+    if (cacheFavs.length > 0) {
       this.favs = JSON.parse(cacheFavs);
       console.log(this.favs);
     }
-
   }
 
+  deleteMovie(mId: number, index: number) {
+    console.log(mId, index);
+    const fa = localStorage.getItem('favorites');
+    const fav = JSON.parse(fa);
+    console.log(fav[index].title, 'successfully deleted');
+    fav.splice(index, 1);
+    localStorage.removeItem('favorites');
+    localStorage.setItem('favorites', JSON.stringify(fav));
+    this.favs = fav;
+    }
 }

@@ -25,6 +25,9 @@ body {
   margin-bottom: -15px;
   background-color: #070707 !important;
 }
+.vid {
+  padding-left: 15px;
+}
 .figure-img {
   border: 6px solid #fff;
   border-radius: 10px;
@@ -60,16 +63,16 @@ figcaption {
   text-decoration: none;
 }
 .fa-heart-o {
-  margin-left: 150px;
+  margin-left: 120px;
   margin-bottom: 10px;
 }
 .fa-heart {
-  margin-left: 150px;
+  margin-left: 120px;
   margin-bottom: 10px;
   color: #FF001F;
 }
 
-.disabled {
+.visible {
   display: none;
 }
 .avi {

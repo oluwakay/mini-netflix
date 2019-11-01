@@ -17,7 +17,8 @@
       <ul class="nav navbar-nav">
         <li class="active"><a href="#" routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact : true}">Home <span class="sr-only">(current)</span></a></li>
-        <li><a [routerLink]="['/movies/favorites']">Favorites</a></li>
+        <li><a [routerLink]="['/movies/favorites']" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact : true}">Favorites</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -29,11 +30,12 @@
           </ul>
         </li>
       </ul>
-      <form class="navbar-form navbar-left" role="search">
+      <form class="navbar-form navbar-left" >
         <div class="form-group">
-          <input type="text" name="q" class="form-control" placeholder="Search">
+          <input type="text" name="searchString" class="form-control" [(ngModel)]="searchString"
+          placeholder="&#61442; Search Movies">
         </div>
-        <button type="submit" (click)="goToSearch(search.value)" class="btn btn-default">Submit</button>
+        <!-- <button type="button" class="btn btn-default">Submit</button> -->
       </form>
       <ul class="nav navbar-nav navbar-right">
         <li *ngIf="user">
@@ -53,17 +55,18 @@
 <div class="container-fluid">
     <h2 class="vid">{{pageTitle}}</h2>
     <div class="row vid">
-        <div *ngFor="let m of movies; index as j" class="col-md-4">
-
-            <div class="card">
-                <a [routerLink]="['/movies', m.id]">
+        <div *ngFor="let m of filteredMovies; index as j" class="col-md-4">
+            <div class="card" >
+                <a [routerLink]="['/movies', m.id]"
+                [queryParams]="{ search: searchString }"
+                queryParamsHandling="merge" >
                 <figure class="figure">
                   <img [src]="'https://image.tmdb.org/t/p/w500/' + m?.poster_path" class="figure-img img-fluid rounded" alt="poster" width="200" height="300">
                   <figcaption class="figure-caption" [title]="m?.title">{{m?.title}}</figcaption>
                 </figure>
               </a>
                 <div>
-                <p class="r-date"><strong>{{splitYear(m.release_date)}}</strong></p>
+                <p class="r-date"><strong>{{m.release_date | date: 'MMM yyyy'}}</strong></p>
                 <span class="fa fa-heart-o" *ngIf="!isFavorite" (click)="favButton(m.id, j)"></span>
                 <span class="fa fa-heart" (click)="favButton(m.id, j)" *ngIf="isFavorite"></span>
               </div>
@@ -72,3 +75,6 @@
         </div>
     </div>
 </div>
+<footer class="container">
+    &copy; 2019 <a href="https://www.twitter.com/lollykrown" target="_blank">Ol&#250;wak&#225;y&#242;d&#233;. </a> All rights reserved.
+</footer>

@@ -134,6 +134,7 @@ export class MovieService {
             movieCache[data[i].id] = data[i];
           });
           localStorage.setItem('movies', JSON.stringify(movieCache));
+          // sessionStorage.setItem('movies', JSON.stringify(movieCache));
         } else {
           console.log('merge/update cache data');
           movieCache = JSON.parse(localStorage.getItem('movies'));
@@ -141,6 +142,7 @@ export class MovieService {
             movieCache[data[i].id] = data[i];
           });
           localStorage.setItem('movies', JSON.stringify(movieCache));
+          // sessionStorage.setItem('movies', JSON.stringify(movieCache));
         }
 
       } catch (e) {

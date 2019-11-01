@@ -5,17 +5,12 @@ import { MovieDetailsComponent } from './movies/movie-details/movie-details.comp
 import { SelectiveStrategy } from './selective-strategy.service';
 import { MovieResolver } from './movies/movie-resolver.service';
 import { FavoritesComponent } from './favorites/favorites.component';
-import { SearchResultsComponent } from './movies/search-results/search-results.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent },
   {
     path: 'movies/favorites',
     component: FavoritesComponent
-  },
-  {
-    path: 'movies/results',
-    component: SearchResultsComponent
   },
   {
     path: 'movies/:id',

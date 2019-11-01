@@ -21,7 +21,6 @@ import { FavoritesComponent } from './favorites/favorites.component';
     AppComponent,
     HomeComponent,
     FavoritesComponent,
-    SafePipe
   ],
   imports: [
     AngularFontAwesomeModule,

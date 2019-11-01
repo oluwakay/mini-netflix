@@ -85,3 +85,12 @@ figcaption {
   margin-right: 20px;
   margin-left: 20px;
 }
+.fa-trash {
+  margin-left: 150px;
+  color: #FF001F;
+}
+.empty-favs {
+  margin-left: 20px;
+  color: #FF001F;
+
+}
