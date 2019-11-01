@@ -43,7 +43,7 @@
 <div class="container-fluid">
   <h2 class="vid">{{pageTitle}}</h2>
   <div class="row vid">
-      <h2 class="empty-favs" *ngIf="!favs.length">You don't have favorites yet</h2>
+      <!-- <h2 class="empty-favs" *ngIf="!favs.length">You don't have favorites yet</h2> -->
       <div *ngFor="let f of favs; index as k" class="col-md-4">
           <div class="card">
               <a [routerLink]="['/movies', f.id]">

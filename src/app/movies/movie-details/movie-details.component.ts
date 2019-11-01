@@ -19,10 +19,8 @@ export class MovieDetailsComponent implements OnInit {
   cast: ICast | undefined;
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              private user: UserService,
               private movieService: MovieService,
-              private sanitizer: DomSanitizer) { }
+              public sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     const param = this.route.snapshot.paramMap.get('id');
@@ -77,8 +75,8 @@ onProductRetrieved(movie: IMovie): void {
   getCasts(id: number) {
     this.movieService.getCast(id).subscribe({
       next: casts => {
-        const { cast } = casts;
-        this.cast = cast;
+        // const { cast } = casts;
+        this.cast = casts[1];
         // localStorage.setItem('results', JSON.stringify(results));
         console.log(this.cast);
       },
@@ -89,8 +87,8 @@ onProductRetrieved(movie: IMovie): void {
   getTrailer(id: number) {
     this.movieService.getTrailer(id).subscribe({
       next: trailer => {
-        const { results } = trailer;
-        this.trailer = results;
+        // const { results } = trailer;
+        this.trailer = trailer[1];
         // localStorage.setItem('results', JSON.stringify(results));
         console.log(this.trailer);
       },

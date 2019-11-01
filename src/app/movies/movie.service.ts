@@ -41,7 +41,7 @@ export class MovieService {
       catchError(this.handleError)
     );
   }
-  getTrailer(id: number): Observable<any> {
+  getTrailer(id: number): Observable<ITrailers> {
     const url = `${this.url}${id}$/videos?api_key=${this.apiKey}&language=${this.lang}`;
     return this.http.get<ITrailers>(url)
       .pipe(
@@ -53,9 +53,9 @@ export class MovieService {
     const searchPhrase = encodeURI(`${movie.title} ${movie.release_date.split('-')[0]} Official Trailer`);
     window.location.href = 'https://www.youtube.com/results?search_query=' + searchPhrase;
   }
-  getCast(id: number): Observable<any> {
+  getCast(id: number): Observable<ICast[]> {
     const url = `${this.url}${id}/credits?api_key=${this.apiKey}`;
-    return this.http.get<ICast>(url)
+    return this.http.get<ICast[]>(url)
       .pipe(
         tap(data => console.log('getCast: ' + JSON.stringify(data))),
         catchError(this.handleError)
