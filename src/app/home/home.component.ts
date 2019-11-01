@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { IMovie } from '../movies/IMovie';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MovieService } from '../movies/movie.service';
-import { UserService } from '../shared/user.service';
 import { AuthService } from '../shared/auth.service';
 import { User } from 'firebase';
 
@@ -14,8 +13,8 @@ import { User } from 'firebase';
 export class HomeComponent implements OnInit {
   pageTitle = 'Popular Movies';
   errorMessage = '';
-  movies: IMovie | undefined;
-  filteredMovies: IMovie| undefined;
+  movies: IMovie[];
+  filteredMovies: IMovie[];
   movie: IMovie | undefined;
   prefix = 'https://image.tmdb.org/t/p/w500/';
   user: User;

@@ -8,14 +8,12 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MovieModule } from './movies/movie.module';
 import { AngularFontAwesomeModule} from 'angular-font-awesome';
-import { SafePipe } from './safe-pipe.pipe';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { FavoritesComponent } from './favorites/favorites.component';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -35,9 +33,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     AngularFirestoreModule,
     AngularFireStorageModule,
   ],
-  providers: [{
-    provide: LocationStrategy, useClass: HashLocationStrategy
-  }],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
