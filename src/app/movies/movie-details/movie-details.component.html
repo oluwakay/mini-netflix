@@ -75,7 +75,7 @@
                         <div class="col-md-7">
                             <div class="cast">
                                 <p>Cast</p>
-                                <div *ngFor="let c of (cast); let i = index">
+                                <div *ngFor="let c of (cast ? cast.slice(0,9): []); let i = index">
                                 <span class="cast-span" *ngIf="c.profile_path">
                                   <img class="cast-img" [src]="'https://image.tmdb.org/t/p/w500/' + c?.profile_path" alt="c.name" width="60px" height="60px">
                                   <p class="cast-text">{{c.name}}</p>
@@ -85,16 +85,11 @@
                             </div>
                             <div class="trailer">
                                 <p>Trailer</p>
-                                <div class="trailer-div" *ngFor="let v of (trailer); let i = index">
+                                <div class="trailer-div" *ngFor="let v of (trailer ? trailer.slice(0,4): []); let i = index">
                                     <span class="trailer-span">
                                       <iframe width="200px" height="120px"
                                         [src]="sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + v.key + '?autoplay=1&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com')">
-                                    </iframe>
-
-                                      <!-- <iframe width="170px" height="100px"
-                                        [src]="'https://www.youtube.com/embed/' + v?.key" frameborder="0"
-                                        allowfullscreen>
-                                      </iframe> -->
+                                      </iframe>
                                     </span>
                                 </div>
                             </div>

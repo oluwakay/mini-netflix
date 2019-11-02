@@ -17,8 +17,10 @@ export class MovieService {
   constructor(private http: HttpClient) { }
 
   getMovies(): Observable<IMovie[]> {
-    const moviesUrl = `${this.url}popular?api_key=${this.apiKey}&language=${this.lang}`;
-    return this.http.get<IMovie[]>(moviesUrl)
+    const popularUrl = `${this.url}popular?api_key=${this.apiKey}&language=${this.lang}`;
+    const topRatedUrl = `${this.url}top_rated?api_key=${this.apiKey}&language=${this.lang}`;
+    const nowPlayingUrl = `${this.url}now_playing?api_key=${this.apiKey}&language=${this.lang}`;
+    return this.http.get<IMovie[]>(nowPlayingUrl)
     .pipe(
       map(this.extractData),
       // tap(data => console.log('All: ' + JSON.stringify(data))),
@@ -45,7 +47,8 @@ export class MovieService {
     const url = `${this.url}${id}$/videos?api_key=${this.apiKey}&language=${this.lang}`;
     return this.http.get<ITrailers>(url)
       .pipe(
-        tap(data => console.log('getTrailers: ' + JSON.stringify(data))),
+        // tap(data => console.log('getTrailers: ' + JSON.stringify(data))),
+        map(this.extractTrailers),
         catchError(this.handleError)
       );
   }
@@ -53,16 +56,14 @@ export class MovieService {
     const searchPhrase = encodeURI(`${movie.title} ${movie.release_date.split('-')[0]} Official Trailer`);
     window.location.href = 'https://www.youtube.com/results?search_query=' + searchPhrase;
   }
-  getCast(id: number): Observable<ICast[]> {
+  getCast(id: number): Observable<ICast> {
     const url = `${this.url}${id}/credits?api_key=${this.apiKey}`;
-    return this.http.get<ICast[]>(url)
+    return this.http.get<ICast>(url)
       .pipe(
-        tap(data => console.log('getCast: ' + JSON.stringify(data))),
+        map(this.extractCast),
         catchError(this.handleError)
       );
   }
-
-
 
   addMovie(newMovie: IMovie): Observable<IMovie> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -151,6 +152,28 @@ export class MovieService {
       }
     }
 
+    return body.results || {};
+  }
+
+  private extractCast(res) {
+    const body = res;
+    let data;
+    if (body.cast !== undefined) {
+      data = body.cast;
+    } else {
+      data = null;
+    }
+    return body.cast || {};
+  }
+
+  private extractTrailers(res) {
+    const body = res;
+    let data;
+    if (body.results !== undefined) {
+      data = body.results;
+    } else {
+      data = null;
+    }
     return body.results || {};
   }
 

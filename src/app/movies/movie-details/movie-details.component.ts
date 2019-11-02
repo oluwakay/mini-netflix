@@ -75,9 +75,7 @@ onProductRetrieved(movie: IMovie): void {
   getCasts(id: number) {
     this.movieService.getCast(id).subscribe({
       next: casts => {
-        // const { cast } = casts;
-        this.cast = casts[1];
-        // localStorage.setItem('results', JSON.stringify(results));
+        this.cast = casts;
         console.log(this.cast);
       },
       error: err => this.errorMessage = err
@@ -86,11 +84,9 @@ onProductRetrieved(movie: IMovie): void {
 
   getTrailer(id: number) {
     this.movieService.getTrailer(id).subscribe({
-      next: trailer => {
-        // const { results } = trailer;
-        this.trailer = trailer[1];
-        // localStorage.setItem('results', JSON.stringify(results));
-        console.log(this.trailer);
+      next: trailers => {
+        this.trailer = trailers;
+        console.log(trailers);
       },
       error: err => this.errorMessage = err
     });
