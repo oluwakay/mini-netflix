@@ -87,7 +87,7 @@
                                 <p>Trailer</p>
                                 <div class="trailer-div" *ngFor="let v of (trailer ? trailer.slice(0,4): []); let i = index">
                                     <span class="trailer-span">
-                                      <iframe width="200px" height="120px"
+                                      <iframe width="220px" height="140px"
                                         [src]="sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/' + v.key + '?autoplay=1&fs=1&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&origin=https://youtubeembedcode.com')">
                                       </iframe>
                                     </span>

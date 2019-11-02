@@ -1,4 +1,4 @@
-import { LoadingIndicatorService } from './loadingIndicatorStatus';
+import { LoadingIndicatorService } from './loadingIndicator.service';
 import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import * as firebase from 'firebase/app';
